@@ -1,0 +1,61 @@
+-- @path SML=/at.ac.tuwien.big.statesml.transformations/metamodels/statesml.ecore
+-- @nsURI PN=http://org.pnml.tools/epnk/pnmlcoremodel
+
+module SML2PN;
+create OUT : PN from IN : SML;
+
+rule StateSys2PN {
+	from
+		i1 : SML!StateSystem
+	to 
+		o0 : PN!PetriNetDoc(
+			net <- o1
+		),
+		o1 : PN!PetriNet(
+			id <- 'PN1' ,
+			name <- o2,
+			page <- pPage
+						
+		),
+		o2 : PN!Name(
+			text <- i1.name	
+		),
+		
+		pPage : PN!Page(
+			 id <- 'P1',
+			 name <- pPageName
+			  
+		),
+		
+		pPageName : PN!Name(
+			text <- 'MainPage'
+		)
+		
+--		initStepPlace : PN!Place(
+			
+--			id <- i1.nodes->select(s | s.oclIsTypeOf(SML!State))
+--		)
+		
+					
+}
+
+rule State2Place {
+	
+	from
+	    
+	    s1 : SML!State
+		
+	to 
+	
+		p1 : PN!Place(
+			
+			id <- 'InitialStep'
+
+		)
+		
+
+}
+
+
+
+

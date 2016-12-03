@@ -15,6 +15,7 @@ rule StateSys2PN {
 			id <- 'PN1' ,
 			name <- o2,
 			page <- pPage
+						
 		),
 		o2 : PN!Name(
 			text <- i1.name	
@@ -22,13 +23,32 @@ rule StateSys2PN {
 		
 		pPage : PN!Page(
 			 id <- 'P1',
-			 name <- pPageName
+			 name <- pPageName,
+			 object <- initStep
+			
+			 
 		),
 		
 		pPageName : PN!Name(
 			text <- 'MainPage'
-		)
+		),
+		
+		initStep : PN!Place(
+
 			
+			id <- 'initialstep', -- check this if is correct to type mannually !!
+			name <- initPlaceName
+			
+		),
+		
+		initPlaceName : PN!Name(
+			
+		
+			text <- i1.nodes->select(s | s.oclIsTypeOf(SML!State))->toString()  -- extend the OCL to select just InitialStep
+		)
+		
+		
+		
 		
 		
 }

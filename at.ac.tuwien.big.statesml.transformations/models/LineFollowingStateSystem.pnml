@@ -8,6 +8,11 @@
       <name>
         <text>MainPage</text>
       </name>
+      <place id="initialstep">
+        <name>
+          <text>Sequence {IN!InitialStep, IN!FollowingLine, IN!TerminalStep, IN!Reversing}</text>
+        </name>
+      </place>
     </page>
   </net>
 </pnml>
