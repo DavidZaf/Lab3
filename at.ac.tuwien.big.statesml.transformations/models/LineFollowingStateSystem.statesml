@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statesml:StateSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:statesml="http://www.big.tuwien.ac.at/statesml" name="SimpleLineFollowing">
+  <nodes xsi:type="statesml:State" name="InitialStep" outgoingEdges="//@edges.0" initial="true"/>
+  <nodes xsi:type="statesml:State" name="FollowingLine" outgoingEdges="//@edges.2" incomingEdges="//@edges.9">
+    <actionSequence>
+      <function href="resources/LineFollowingRobotLibrary.xmi#//@units.0/@functions.0"/>
+    </actionSequence>
+  </nodes>
+  <nodes xsi:type="statesml:State" name="TerminalStep" incomingEdges="//@edges.4" terminal="true"/>
+  <nodes xsi:type="statesml:State" name="Reversing" outgoingEdges="//@edges.7" incomingEdges="//@edges.6">
+    <actionSequence>
+      <function href="resources/LineFollowingRobotLibrary.xmi#//@units.0/@functions.1"/>
+      <parameters>
+        <valueSpecification xsi:type="statesml:StringValueSpecification" value="back"/>
+        <parameter href="resources/LineFollowingRobotLibrary.xmi#//@units.0/@functions.1/@parameters.0"/>
+      </parameters>
+    </actionSequence>
+  </nodes>
+  <nodes xsi:type="statesml:Transition" name="FollowLine" outgoingEdges="//@edges.1" incomingEdges="//@edges.0"/>
+  <nodes xsi:type="statesml:SelectionConvergence" name="ConvergeToFollowLine" outgoingEdges="//@edges.9" incomingEdges="//@edges.1 //@edges.8"/>
+  <nodes xsi:type="statesml:SelectionDivergence" name="DivergeAfterFollowLine" outgoingEdges="//@edges.3 //@edges.5" incomingEdges="//@edges.2"/>
+  <nodes xsi:type="statesml:Transition" name="Terminate" outgoingEdges="//@edges.4" incomingEdges="//@edges.3">
+    <trigger event="//@processibleEvents.1"/>
+  </nodes>
+  <nodes xsi:type="statesml:Transition" name="Reverse" outgoingEdges="//@edges.6" incomingEdges="//@edges.5">
+    <trigger event="//@processibleEvents.0"/>
+  </nodes>
+  <nodes xsi:type="statesml:Transition" name="RepeatFollowLineAfterReversing" outgoingEdges="//@edges.8" incomingEdges="//@edges.7"/>
+  <edges name="InitialStepTOFollowLine" source="//@nodes.0" target="//@nodes.4"/>
+  <edges name="FollowLineTOConvergeToFollowLine" source="//@nodes.4" target="//@nodes.5"/>
+  <edges name="FollowingLineTODivergeAfterFollowLine" source="//@nodes.1" target="//@nodes.6"/>
+  <edges name="DivergeAfterFollowLineTOTerminate" source="//@nodes.6" target="//@nodes.7"/>
+  <edges name="TerminateTOTerminalStep" source="//@nodes.7" target="//@nodes.2"/>
+  <edges name="DivergeAfterFollowLineTOReverse" source="//@nodes.6" target="//@nodes.8"/>
+  <edges name="ReverseTOReversing" source="//@nodes.8" target="//@nodes.3"/>
+  <edges name="ReversingTORepeatFollowLineAfterReversing" source="//@nodes.3" target="//@nodes.9"/>
+  <edges name="RepeatFollowLineAfterReversingTOConvergeToFollowLine" source="//@nodes.9" target="//@nodes.5"/>
+  <edges name="ConvergeToFollowLineTOFollowingLine" source="//@nodes.5" target="//@nodes.1"/>
+  <processibleEvents xsi:type="statesml:ChangeEvent" name="SurfaceColorIsRed">
+    <changeExpression>
+      <booleanFunctionCall>
+        <function href="resources/PrimitiveDataTypes.xmi#//@types.0/@functions.0"/>
+        <parameters>
+          <valueSpecification xsi:type="statesml:AttributeValueSpecification">
+            <attribute href="resources/LineFollowingRobotLibrary.xmi#//@units.0/@attributes.0"/>
+          </valueSpecification>
+          <parameter href="resources/PrimitiveDataTypes.xmi#//@types.0/@functions.0/@parameters.0"/>
+        </parameters>
+        <parameters>
+          <valueSpecification xsi:type="statesml:StringValueSpecification" value="red"/>
+          <parameter href="resources/PrimitiveDataTypes.xmi#//@types.0/@functions.0/@parameters.1"/>
+        </parameters>
+      </booleanFunctionCall>
+    </changeExpression>
+  </processibleEvents>
+  <processibleEvents xsi:type="statesml:ChangeEvent" name="SurfaceColorIsWhite">
+    <changeExpression>
+      <booleanFunctionCall>
+        <function href="resources/PrimitiveDataTypes.xmi#//@types.0/@functions.0"/>
+        <parameters>
+          <valueSpecification xsi:type="statesml:AttributeValueSpecification">
+            <attribute href="resources/LineFollowingRobotLibrary.xmi#//@units.0/@attributes.0"/>
+          </valueSpecification>
+          <parameter href="resources/PrimitiveDataTypes.xmi#//@types.0/@functions.0/@parameters.0"/>
+        </parameters>
+        <parameters>
+          <valueSpecification xsi:type="statesml:StringValueSpecification" value="white"/>
+          <parameter href="resources/PrimitiveDataTypes.xmi#//@types.0/@functions.0/@parameters.1"/>
+        </parameters>
+      </booleanFunctionCall>
+    </changeExpression>
+  </processibleEvents>
+  <systemUnit href="resources/LineFollowingRobotLibrary.xmi#//@units.0"/>
+</statesml:StateSystem>

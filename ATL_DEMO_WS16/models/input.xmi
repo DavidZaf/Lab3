@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<publication:JournalCollection
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:publication="http://publication/1.0"
+    xsi:schemaLocation="http://publication/1.0 ../metamodels/Publication.ecore">
+  <journals
+      name="IEEE Computer"/>
+  <journals
+      name="ACM Comp. Sur."/>
+  <journals
+      name="IEEE Software"/>
+</publication:JournalCollection>

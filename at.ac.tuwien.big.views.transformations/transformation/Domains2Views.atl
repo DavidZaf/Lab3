@@ -1,0 +1,148 @@
+-- @path Views=/at.ac.tuwien.big.views.transformations/metamodel/views.ecore
+
+module Domains2Views;
+create OUT : Views from IN : Views;
+
+
+-- Helper Functions
+
+helper def : id : Integer = 0;
+
+helper def : newId() : String = thisModule.refSetValue('id', thisModule.id+1).refGetValue('id').toString();
+
+helper context String def : firstToUpper() : String = 
+	if(self.size() > 1) then self.toSequence().first().toUpper().concat(self.substring(2, self.size())) else self.toUpper() endif;
+
+helper context Views!Class def: allSuperClasses() : Set(Views!Class) =
+    if (not self.superClass.oclIsUndefined()) then Set{self.superClass} -> union(self.superClass.allSuperClasses()) else Set{} endif;
+
+helper context Views!Class def: isUnreferenced() : Boolean =
+	Views!Class.allInstances().asSet() -> symetricDifference(Views!Association.allInstances() -> collect(x|x.navigableEnd.type) -> asSet()) -> asSequence() -> first() = self;
+
+helper context Views!Class def: getList() : Set(Views!Association) = 
+	Views!Association.allInstances() -> select(x|x.associationEnds -> excluding(x.navigableEnd) -> collect(y|y.type) -> first() = self);
+
+helper context Views!Association def: getTargetViews() : Views!CreateView =
+	Views!CreateView.allInstances() -> select(x|x.class = self.navigableEnd.type) -> first();
+
+-- Rules
+
+rule DomainModel2ViewModel {
+	from
+		dm : Views!DomainModel
+	to 
+		vm : Views!ViewModel (
+			viewGroups <- g
+		),
+		g : Views!ViewGroup (
+			name <- 'Welcome View Group',
+			welcomeViewGroup <- true,
+			views <- dm.domainModelElements -> select(x|x.oclIsTypeOf(Views!Class)) -> collect(x|thisModule.Class2CreateView(x))
+		)
+}
+
+lazy rule Class2CreateView {
+	from
+		c : Views!Class
+	to 
+		v : Views!CreateView (
+			layout <- hl,
+			name <- c.name,
+			header <- c.name,
+			class <- c,
+			elementGroups <- g,
+			elementGroups <- c.getList(),
+			startView <- c.isUnreferenced()
+		),
+		g : Views!ElementGroup (
+			header <- c.name + ' Information',
+			layout <- hv,
+			viewElements <- c.allSuperClasses() -> collect (x|x.properties) -> union(c.properties) -> flatten() -> collect(x|thisModule.Property2PropertyElement(x))
+		),
+		hl : Views!Layout (
+			alignment <- #Horizontal
+		),
+		hv : Views!Layout (
+			alignment <- #Vertical
+		)
+}
+
+lazy abstract rule Property2PropertyElement {
+	from
+		p : Views!Property 
+	to 
+		pe : Views!PropertyElement (
+			property <- p,
+			label <- p.name.firstToUpper(),
+			elementID <- thisModule.newId()
+		)
+}
+
+lazy rule Property2Text extends Property2PropertyElement {
+	from
+		p : Views!Property (
+			p.type.oclIsTypeOf(Views!DataType) and Sequence{'String', 'Integer', 'Double'}.includes(p.type.name)
+		)
+	to 
+		pe : Views!Text (
+			long <- false,
+			format <- if (p.type.name = 'String') then '^[a-zA-Z -]+$' else 
+						if (p.type.name = 'Integer') then '^[0-9]+$' else '^[0-9]+\\[0-9]$' endif endif
+		)
+}
+
+lazy rule Property2Selection extends Property2PropertyElement {
+	from
+		p : Views!Property (
+			p.type.oclIsTypeOf(Views!Enumeration)
+		)
+	to 
+		pe : Views!Selection (
+			selectionItems <- p.type.literals -> collect(x|thisModule.Lit2LitItem(x))
+		)
+}
+
+lazy rule Lit2LitItem{
+	from l : Views!EnumerationLiteral
+	to li : Views!EnumerationLiteralItem(
+		value <- l.name,
+		enumerationLiteral <- l
+	)
+}
+
+lazy rule Property2DateTimePicker extends Property2PropertyElement {
+	from
+		p : Views!Property (
+			p.type.oclIsTypeOf(Views!DataType) and Sequence{'Time', 'Date', 'DateTime'}.includes(p.type.name)
+		)
+	to 
+		pe : Views!DateTimePicker(
+			property <- p,
+			format <- if (p.type.name = 'Time') then  'h:mm A' else 
+						if (p.type.name = 'Date') then 'dddd, MMMM Do YYYY' else 'dddd, MMMM Do YYYY, h:mm A' endif endif		
+		)
+}
+
+rule Association2List {
+	from
+		a : Views!Association
+	to 
+		g : Views!ElementGroup (
+			layout <- lv,
+			header <- a.name.firstToUpper(),
+			viewElements <-  l
+		),
+		l : Views!List (
+			elementID <- thisModule.newId(),
+			label <- a.name.firstToUpper(),
+			link <- lnk
+		),
+		lnk: Views!Link(
+			label <- 'Add',
+			targetView <- a.getTargetViews()
+		),
+		lv : Views!Layout (
+			alignment <- #Vertical
+		)
+		do { l.association <- a; }
+}

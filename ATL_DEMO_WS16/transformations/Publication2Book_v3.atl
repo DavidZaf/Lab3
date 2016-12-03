@@ -1,0 +1,29 @@
+-- @path Publication=/ATL_DEMO_WS16/metamodels/Publication.ecore
+-- @path Book=/ATL_DEMO_WS16/metamodels/Book.ecore
+
+module Publication2Book;
+create OUT : Book from IN : Publication;
+
+rule Journal2Book  {
+	from
+		j : Publication!Journal
+	to 
+		b1 : Book!Book (
+			name <- j.name + ' Original'
+		),
+		b2 : Book!Book (
+			name <- j.name + ' Duplicate'
+		)
+}
+
+
+rule Collection2Collection  {
+	from
+		jc : Publication!JournalCollection
+	to 
+		bc : Book!BookCollection (
+			books <- jc.journals -> collect(x | thisModule.resolveTemp(x, 'b1') ),
+			books <- jc.journals -> collect(x | thisModule.resolveTemp(x, 'b2') )
+		)
+}
+

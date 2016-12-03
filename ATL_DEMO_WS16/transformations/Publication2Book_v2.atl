@@ -1,0 +1,31 @@
+-- @path Publication=/ATL_DEMO_WS16/metamodels/Publication.ecore
+-- @path Book=/ATL_DEMO_WS16/metamodels/Book.ecore
+
+module Publication2Book;
+create OUT : Book from IN : Publication;
+
+helper def : id : Integer = 0;
+helper context Integer def : inc() : Integer = self + 1; 
+
+
+rule Collection2Collection  {
+	from
+		jc : Publication!JournalCollection
+	to 
+		bc : Book!BookCollection (
+			books <- jc.journals
+		)
+}
+
+rule Journal2Book  {
+	from
+		j : Publication!Journal
+	to 
+		b : Book!Book (
+			name <- j.name
+		)
+	do{
+		thisModule.id <- thisModule.id.inc();
+		b.id <- thisModule.id;
+	}
+}

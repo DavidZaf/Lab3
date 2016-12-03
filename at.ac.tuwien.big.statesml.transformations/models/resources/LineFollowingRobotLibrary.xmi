@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statesml:SystemUnitLibrary xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:statesml="http://www.big.tuwien.ac.at/statesml" name="SimpleLineFollowingRobotLibrary">
+  <units name="SimpleLineFollowingRobot">
+    <functions name="followLine"/>
+    <functions name="pickDirection">
+      <parameters name="direction">
+        <type href="PrimitiveDataTypes.xmi#//@types.0"/>
+      </parameters>
+    </functions>
+    <attributes name="surfaceColor">
+      <type href="PrimitiveDataTypes.xmi#//@types.0"/>
+    </attributes>
+  </units>
+</statesml:SystemUnitLibrary>

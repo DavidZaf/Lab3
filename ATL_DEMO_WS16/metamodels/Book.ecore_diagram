@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_dQHa0LTNEeaMD-wEELYN7Q" type="Ecore" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_dSpKYLTNEeaMD-wEELYN7Q" type="2001" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_dSpxcLTNEeaMD-wEELYN7Q" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_dSqYgLTNEeaMD-wEELYN7Q" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dSqYgbTNEeaMD-wEELYN7Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dSqYgrTNEeaMD-wEELYN7Q"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_dSqYg7TNEeaMD-wEELYN7Q" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dSqYhLTNEeaMD-wEELYN7Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dSqYhbTNEeaMD-wEELYN7Q"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_dSqYhrTNEeaMD-wEELYN7Q" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dSqYh7TNEeaMD-wEELYN7Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dSqYiLTNEeaMD-wEELYN7Q"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="Book.ecore#//BookCollection"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dSpKYbTNEeaMD-wEELYN7Q" x="273" y="91"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_dSqYibTNEeaMD-wEELYN7Q" type="2001" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_dSqYi7TNEeaMD-wEELYN7Q" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_dSqYjLTNEeaMD-wEELYN7Q" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dSqYjbTNEeaMD-wEELYN7Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dSqYjrTNEeaMD-wEELYN7Q"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_dSqYj7TNEeaMD-wEELYN7Q" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dSqYkLTNEeaMD-wEELYN7Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dSqYkbTNEeaMD-wEELYN7Q"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_dSq_kLTNEeaMD-wEELYN7Q" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dSq_kbTNEeaMD-wEELYN7Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dSq_krTNEeaMD-wEELYN7Q"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="Book.ecore#//Book"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dSqYirTNEeaMD-wEELYN7Q" x="273" y="217"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_dQIB4LTNEeaMD-wEELYN7Q"/>
+  <element xmi:type="ecore:EPackage" href="Book.ecore#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_dTAWwLTNEeaMD-wEELYN7Q" type="4003" source="_dSpKYLTNEeaMD-wEELYN7Q" target="_dSqYibTNEeaMD-wEELYN7Q">
+    <children xmi:type="notation:DecorationNode" xmi:id="_dTA90LTNEeaMD-wEELYN7Q" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_dTA90bTNEeaMD-wEELYN7Q" x="16" y="32"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_dTA90rTNEeaMD-wEELYN7Q" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_dTA907TNEeaMD-wEELYN7Q" x="-13" y="-26"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_dTAWwbTNEeaMD-wEELYN7Q" fontName="Segoe UI"/>
+    <element xmi:type="ecore:EReference" href="Book.ecore#//BookCollection/books"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_dTAWwrTNEeaMD-wEELYN7Q" points="[0, 0, 0, -60]$[0, 60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dThUILTNEeaMD-wEELYN7Q" id="(0.49640287769784175,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dTh7MLTNEeaMD-wEELYN7Q" id="(0.4965034965034965,0.0)"/>
+  </edges>
+</notation:Diagram>

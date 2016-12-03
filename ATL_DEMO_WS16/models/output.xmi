@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<book:BookCollection xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:book="http://book/1.0">
+  <books name="IEEE Computer Original"/>
+  <books name="ACM Comp. Sur. Original"/>
+  <books name="IEEE Software Original"/>
+  <books name="IEEE Computer Duplicate"/>
+  <books name="ACM Comp. Sur. Duplicate"/>
+  <books name="IEEE Software Duplicate"/>
+</book:BookCollection>
