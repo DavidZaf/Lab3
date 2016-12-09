@@ -26,7 +26,7 @@
           <children visible="true" type="2009" element="//@net.0/@page.0/@labelproxy.1">
             <children xsi:type="notation:DecorationNode" visible="true" type="5004" element="//@net.0/@page.0/@labelproxy.1"/>
             <styles xsi:type="notation:ShapeStyle" fontColor="0" fontName="Tahoma" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="16777215" lineWidth="-1" roundedBendpointsRadius="0"/>
-            <layoutConstraint xsi:type="notation:Bounds" x="525" y="105" width="-1" height="-1"/>
+            <layoutConstraint xsi:type="notation:Bounds" x="480" y="165" width="-1" height="-1"/>
           </children>
           <children visible="true" type="2001" element="terminalstep">
             <styles xsi:type="notation:ShapeStyle" fontColor="0" fontName="Tahoma" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0"/>
@@ -278,7 +278,7 @@
       <place id="followingline">
         <name>
           <graphics>
-            <offset x="-65.0" y="-50.0"/>
+            <offset x="-110.0" y="10.0"/>
           </graphics>
           <text>FollowingLine</text>
         </name>

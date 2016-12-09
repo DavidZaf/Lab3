@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="PN1">
+    <name>
+      <text>SimpleLineFollowing</text>
+    </name>
+    <page id="P1">
+      <name>
+        <text>MainPage</text>
+      </name>
+      <place id="InitialStep">
+        <name>
+          <text>InitialStep</text>
+        </name>
+      </place>
+      <place id="FollowingLine">
+        <name>
+          <text>FollowingLine</text>
+        </name>
+      </place>
+      <place id="TerminalStep">
+        <name>
+          <text>TerminalStep</text>
+        </name>
+      </place>
+      <place id="Reversing">
+        <name>
+          <text>Reversing</text>
+        </name>
+      </place>
+    </page>
+  </net>
+</pnml>

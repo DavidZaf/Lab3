@@ -24,32 +24,66 @@ rule StateSys2PN {
 		pPage : PN!Page(
 			 id <- 'P1',
 			 name <- pPageName,
-			 object <- initStep
-			
 			 
+			 object <- i1.nodes
+						
+		     
 		),
 		
 		pPageName : PN!Name(
 			text <- 'MainPage'
-		),
-		
-		initStep : PN!Place(
-
-			
-			id <- 'initialstep', -- check this if is correct to type mannually !!
-			name <- initPlaceName
-			
-		),
-		
-		initPlaceName : PN!Name(
-			
-		
-			text <- i1.nodes->select(s | s.oclIsTypeOf(SML!State))->toString()  -- extend the OCL to select just InitialStep
 		)
 		
-		
-		
-		
-		
 }
+
+rule State2Place{
+	
+	from state: SML!State
+	
+	to  place : PN!Place(
+		
+		name <- pStateName,
+		id <- state.name.toLower()
+		
+	),
+	pStateName : PN!Name(
+			text <- state.name
+		)
+	
+}
+
+
+rule Transition2Transition{
+	
+	from StateTransition : SML!Transition
+	
+	to PlaceTransition : PN!Transition(
+		
+		name <- pTransitionName,
+		id <- StateTransition.name.toLower()
+
+	),
+	
+	pTransitionName : PN!Name(
+		
+		text <- StateTransition.name
+		
+	)
+
+}
+
+rule Edge2Arc {
+	
+	from edge : SML!Edge
+	
+	to arc : PN!Arc(
+		
+		id <- edge.name
+
+	),
+	pEdgeName : PN!Name(
+			text <- edge.name
+		)	
+}
+
 
