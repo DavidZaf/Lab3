@@ -58,6 +58,16 @@
           <text>RepeatFollowLineAfterReversing</text>
         </name>
       </transition>
+      <arc id="InitialStepTOFollowLine" source="initialstep" target="followline"/>
+      <arc id="FollowLineTOConvergeToFollowLine" source="followline" target="convergetofollowline"/>
+      <arc id="FollowingLineTODivergeAfterFollowLine" source="followingline" target="divergeafterfollowline"/>
+      <arc id="DivergeAfterFollowLineTOTerminate" source="divergeafterfollowline" target="terminate"/>
+      <arc id="TerminateTOTerminalStep" source="terminate" target="terminalstep"/>
+      <arc id="DivergeAfterFollowLineTOReverse" source="divergeafterfollowline" target="reverse"/>
+      <arc id="ReverseTOReversing" source="reverse" target="reversing"/>
+      <arc id="ReversingTORepeatFollowLineAfterReversing" source="reversing" target="repeatfollowlineafterreversing"/>
+      <arc id="RepeatFollowLineAfterReversingTOConvergeToFollowLine" source="repeatfollowlineafterreversing" target="convergetofollowline"/>
+      <arc id="ConvergeToFollowLineTOFollowingLine" source="convergetofollowline" target="followingline"/>
     </page>
   </net>
 </pnml>

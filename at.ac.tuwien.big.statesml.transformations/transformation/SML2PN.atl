@@ -32,7 +32,8 @@ rule StateSys2PN {
 			 id <- 'P1',
 			 name <- pPageName,
 			 
-			 object <- i1.nodes
+			 object <- i1.nodes,
+			 object <- i1.edges
 						
 		     
 		),
@@ -63,6 +64,27 @@ rule State2Place{
 	
 }
 
+rule Edge2Arc {
+	
+	from edge : SML!Edge
+	
+	to arc : PN!Arc(
+		
+	--	name <- pArcName,
+		id <- edge.name
+		
+--		source <- edge.source,
+--		target <- edge.target
+	),
+	
+	pArcName : PN!Name(
+		
+		text <- edge.name
+	)
+	
+
+}
+
 rule SelectionDivergence2Place{
 	
 	from SD : SML!SelectionDivergence
@@ -70,7 +92,9 @@ rule SelectionDivergence2Place{
 	to placeSD : PN!Place(
 		
 		name <- pSDName,
-		id <- SD.name.toLower()		
+		id <- SD.name.toLower()	,
+		"in"<- SD.incomingEdges,
+		out <- SD.outgoingEdges
 		
 	),
 	
@@ -101,9 +125,9 @@ rule Transition2Transition {
 		text <- SMLTransition.name
 		
 	)
+	
 
 }
-
 
 
 --rule TransitionSD2Transition extends TransitionAbstractClass{
@@ -126,7 +150,9 @@ rule SelectionConvergence2Place{
 	to placeSC : PN!Place(
 		
 		name <- pSCName,
-		id <- SC.name.toLower()
+		id <- SC.name.toLower(),
+		"in" <- SC.incomingEdges,
+		out <- SC.outgoingEdges
 	
 	),
 	
@@ -137,18 +163,6 @@ rule SelectionConvergence2Place{
 }
 
 
-rule Edge2Arc {
-	
-	from edge : SML!Edge
-	
-	to arc : PN!Arc(
-		
-	source <- edge.source,
-	target <- edge.target,
-	id <- edge.name
-	)
-	
 
-}
 
 
