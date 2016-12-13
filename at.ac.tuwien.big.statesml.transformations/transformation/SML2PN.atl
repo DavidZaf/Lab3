@@ -4,6 +4,13 @@
 module SML2PN;
 create OUT : PN from IN : SML;
 
+helper def : SD_TransitionName : String = 'AddTran4SD';
+helper def : SD_ArcName : String = 'AddArc4SD';
+helper def : SC_TransitionName : String = 'AddTran4SC';
+helper def : SC_ArcName : String = 'AddArc4SC';
+
+--helper context String def : returnName() :  
+
 rule StateSys2PN {
 	from
 		i1 : SML!StateSystem
@@ -43,7 +50,11 @@ rule State2Place{
 	to  place : PN!Place(
 		
 		name <- pStateName,
-		id <- state.name.toLower()
+		id <- state.name.toLower(),
+		
+		"in" <- state.incomingEdges,
+		out <- state.outgoingEdges
+		
 		
 	),
 	pStateName : PN!Name(
@@ -52,25 +63,79 @@ rule State2Place{
 	
 }
 
+rule SelectionDivergence2Place{
+	
+	from SD : SML!SelectionDivergence
+	
+	to placeSD : PN!Place(
+		
+		name <- pSDName,
+		id <- SD.name.toLower()		
+		
+	),
+	
+	pSDName : PN!Name(
+			text <- SD.name
+		)
+		
+}
 
-rule Transition2Transition{
+
+
+rule Transition2Transition {
 	
-	from StateTransition : SML!Transition
+	from SMLTransition : SML!Transition
 	
-	to PlaceTransition : PN!Transition(
+	to PetriNetTransition : PN!Transition(
 		
 		name <- pTransitionName,
-		id <- StateTransition.name.toLower()
+		id <- SMLTransition.name.toLower(),
+		
+		"in" <- SMLTransition.incomingEdges,
+		out <- SMLTransition.outgoingEdges
 
 	),
 	
 	pTransitionName : PN!Name(
 		
-		text <- StateTransition.name
+		text <- SMLTransition.name
 		
 	)
 
 }
+
+
+
+--rule TransitionSD2Transition extends TransitionAbstractClass{
+	
+--	from SMLTransition : SML!Transition
+	
+--	to  PetriNetTransition : PN!Transition(
+		
+--		id <- SMLTransition.name
+--	)
+	
+
+--}
+
+
+rule SelectionConvergence2Place{
+	
+	from SC : SML!SelectionConvergence
+	
+	to placeSC : PN!Place(
+		
+		name <- pSCName,
+		id <- SC.name.toLower()
+	
+	),
+	
+	pSCName : PN!Name(
+			text <- SC.name
+		)
+	
+}
+
 
 rule Edge2Arc {
 	
@@ -78,12 +143,12 @@ rule Edge2Arc {
 	
 	to arc : PN!Arc(
 		
-		id <- edge.name
+	source <- edge.source,
+	target <- edge.target,
+	id <- edge.name
+	)
+	
 
-	),
-	pEdgeName : PN!Name(
-			text <- edge.name
-		)	
 }
 
 
