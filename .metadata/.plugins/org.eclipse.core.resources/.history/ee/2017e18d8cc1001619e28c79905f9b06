@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="PN1">
+    <name>
+      <text>SimpleLineFollowing</text>
+    </name>
+    <page id="P1">
+      <name>
+        <text>MainPage</text>
+      </name>
+      <place id="initialstep">
+        <name>
+          <text>InitialStep</text>
+        </name>
+      </place>
+      <place id="followingline">
+        <name>
+          <text>FollowingLine</text>
+        </name>
+      </place>
+      <place id="terminalstep">
+        <name>
+          <text>TerminalStep</text>
+        </name>
+      </place>
+      <place id="reversing">
+        <name>
+          <text>Reversing</text>
+        </name>
+      </place>
+      <transition id="followline">
+        <name>
+          <text>FollowLine</text>
+        </name>
+      </transition>
+      <place id="convergetofollowline">
+        <name>
+          <text>ConvergeToFollowLine</text>
+        </name>
+      </place>
+      <place id="divergeafterfollowline">
+        <name>
+          <text>DivergeAfterFollowLine</text>
+        </name>
+      </place>
+      <transition id="terminate">
+        <name>
+          <text>Terminate</text>
+        </name>
+      </transition>
+      <transition id="reverse">
+        <name>
+          <text>Reverse</text>
+        </name>
+      </transition>
+      <transition id="repeatfollowlineafterreversing">
+        <name>
+          <text>RepeatFollowLineAfterReversing</text>
+        </name>
+      </transition>
+      <arc id="InitialStepTOFollowLine" source="initialstep"/>
+      <arc id="FollowLineTOConvergeToFollowLine"/>
+      <arc id="FollowingLineTODivergeAfterFollowLine" source="followingline"/>
+      <arc id="DivergeAfterFollowLineTOTerminate"/>
+      <arc id="TerminateTOTerminalStep" target="terminalstep"/>
+      <arc id="DivergeAfterFollowLineTOReverse"/>
+      <arc id="ReverseTOReversing" target="reversing"/>
+      <arc id="ReversingTORepeatFollowLineAfterReversing" source="reversing"/>
+      <arc id="RepeatFollowLineAfterReversingTOConvergeToFollowLine"/>
+      <arc id="ConvergeToFollowLineTOFollowingLine" target="followingline"/>
+    </page>
+  </net>
+</pnml>
